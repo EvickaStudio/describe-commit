@@ -48,3 +48,13 @@ openai:
   # OpenAI model name (https://bit.ly/4hXCXkL)
   # @type {string}
   modelName: <openai-model-name>
+
+# OpenRouter provider configuration
+openrouter:
+  # OpenRouter API key (get one at https://openrouter.ai/keys)
+  # @type {string}
+  apiKey: <openrouter-api-key>
+
+  # OpenRouter model name (see https://openrouter.ai/models)
+  # @type {string}
+  modelName: <openrouter-model-name>

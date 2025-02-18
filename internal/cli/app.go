@@ -40,6 +40,11 @@ type cliApp struct {
 				ApiKey    option[string]
 				ModelName option[string]
 			}
+
+			OpenRouter struct {
+				ApiKey    option[string]
+				ModelName option[string]
+			}
 		}
 	}
 }
@@ -63,6 +68,8 @@ func NewApp() *cli.Command { //nolint:funlen,gocognit
 			&geminiModelNameFlag,
 			&openAIApiKeyFlag,
 			&openAIModelNameFlag,
+			&openRouterApiKeyFlag,
+			&openRouterModelNameFlag,
 		},
 		Action: func(ctx context.Context, c *cli.Command) error {
 			{ // initialize the options
@@ -102,6 +109,8 @@ func NewApp() *cli.Command { //nolint:funlen,gocognit
 					opt.Providers.Gemini.ModelName.SetFromFlagIfUnset(c, geminiModelNameFlag.Name, c.String)
 					opt.Providers.OpenAI.ApiKey.SetFromFlagIfUnset(c, openAIApiKeyFlag.Name, c.String)
 					opt.Providers.OpenAI.ModelName.SetFromFlagIfUnset(c, openAIModelNameFlag.Name, c.String)
+					opt.Providers.OpenRouter.ApiKey.SetFromFlagIfUnset(c, openRouterApiKeyFlag.Name, c.String)
+					opt.Providers.OpenRouter.ModelName.SetFromFlagIfUnset(c, openRouterModelNameFlag.Name, c.String)
 				}
 
 				{ // validate the options
@@ -130,6 +139,16 @@ func NewApp() *cli.Command { //nolint:funlen,gocognit
 
 						if opt.Providers.OpenAI.ModelName.Value == "" {
 							return errors.New("OpenAI model name is required")
+						}
+					}
+
+					if opt.AIProviderName.Value == ai.ProviderOpenRouter {
+						if opt.Providers.OpenRouter.ApiKey.Value == "" {
+							return errors.New("OpenRouter API key is required")
+						}
+
+						if opt.Providers.OpenRouter.ModelName.Value == "" {
+							return errors.New("OpenRouter model name is required")
 						}
 					}
 				}
@@ -163,6 +182,11 @@ func (app *cliApp) Run(ctx context.Context, workingDir string) error { //nolint:
 		provider = ai.NewOpenAI(
 			app.options.Providers.OpenAI.ApiKey.Value,
 			app.options.Providers.OpenAI.ModelName.Value,
+		)
+	case ai.ProviderOpenRouter:
+		provider = ai.NewOpenRouter(
+			app.options.Providers.OpenRouter.ApiKey.Value,
+			app.options.Providers.OpenRouter.ModelName.Value,
 		)
 	default:
 		return fmt.Errorf("unsupported AI provider: %s", app.options.AIProviderName.Value)

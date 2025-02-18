@@ -119,3 +119,22 @@ var openAIModelNameFlag = cli.StringFlag{
 	Config:   cli.StringConfig{TrimSpace: true},
 	Value:    "gpt-4o-mini",
 }
+
+var openRouterApiKeyFlag = cli.StringFlag{
+	Name:     "openrouter-api-key",
+	Aliases:  []string{"ra"},
+	Usage:    "OpenRouter API key (https://openrouter.ai/settings/keys)",
+	Sources:  cli.EnvVars("OPENROUTER_API_KEY"),
+	OnlyOnce: true,
+	Config:   cli.StringConfig{TrimSpace: true},
+}
+
+var openRouterModelNameFlag = cli.StringFlag{
+	Name:     "openrouter-model-name",
+	Aliases:  []string{"rm"},
+	Usage:    "OpenRouter model name (https://openrouter.ai/models)",
+	Sources:  cli.EnvVars("OPENROUTER_MODEL_NAME"),
+	OnlyOnce: true,
+	Config:   cli.StringConfig{TrimSpace: true},
+	Value:    "openai/gpt-4o-mini",
+}

@@ -14,6 +14,7 @@ Currently, it supports the following AI providers:
 
 - OpenAI
 - Google Gemini
+- OpenRouter
 
 It also allows users to select the desired model for content generating.
 
@@ -127,6 +128,12 @@ Generate a commit message with OpenAI:
 describe-commit --ai openai --openai-api-key "your-api-key"
 ```
 
+Generate a commit message with OpenRouter:
+
+```sh
+describe-commit --ai openrouter --openrouter-api-key "your-api-key"
+```
+
 ```markdown
 docs(README): Update project description and installation instructions
 
@@ -173,7 +180,6 @@ Usage:
 ```bash
 $ describe-commit [GLOBAL FLAGS] [COMMAND] [COMMAND FLAGS] [dir-path]
 ```
-
 Global flags:
 
 | Name                                           | Description                                                                                            |               Default value               |  Environment variables  |
@@ -196,3 +202,4 @@ Global flags:
 This is open-sourced software licensed under the [MIT License][link_license].
 
 [link_license]:https://github.com/tarampampam/describe-commit/blob/master/LICENSE
+
