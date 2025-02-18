@@ -128,10 +128,16 @@ Generate a commit message with OpenAI:
 describe-commit --ai openai --openai-api-key "your-api-key"
 ```
 
-Generate a commit message with OpenRouter:
+Generate a commit message with OpenRouter (defaults to `openai/gpt-4o-mini`):
 
 ```sh
 describe-commit --ai openrouter --openrouter-api-key "your-api-key"
+```
+
+Or specify the model name:
+
+```sh
+describe-commit --ai openrouter --openrouter-api-key "your-api-key" --openrouter-model-name "google/gemini-2.0-flash-001"
 ```
 
 ```markdown
